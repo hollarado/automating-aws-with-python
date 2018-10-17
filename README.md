@@ -16,3 +16,4 @@ Webotron currently has the following Features
 - List contents of a bucket
 - Create and setup buckets
 - Sync directory tree to bucket
+- Set AWS profile with --profile=<profileName>
