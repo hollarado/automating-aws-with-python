@@ -98,7 +98,7 @@ class BucketManager:
 
     def load_manifest(self, bucket):
         """Load manifest for caching purpses."""
-        paginator = s3.meta.client.get_paginator('list_objects_v2')
+        paginator = self.s3.meta.client.get_paginator('list_objects_v2')
         for page in paginator.paginate(Bucket=bucket.name):
             for obj in page.get('Contents', []):
                 self.manifest[obj['Key']] = obj['ETag']
@@ -116,9 +116,9 @@ class BucketManager:
         with open(path, 'rb') as f:
             while True:
                 data = f.read(self.CHUNK_SIZE)
-                 if not data:
+                if not data:
                     break
-                 hashes.append(self.hash_data(data))
+                hashes.append(self.hash_data(data))
         if not hashes:
             return
         elif len(hashes) == 1:
@@ -132,8 +132,7 @@ class BucketManager:
         content_type = mimetypes.guess_type(key)[0] or 'text/plain'
 
         etag = self.gen_etag(path)
-        if self.manifest.get(ket, '') == etag:
-            print("Skipping {}, etags match".format(key))
+        if self.manifest.get(key, '') == etag:
             return
 
         return bucket.upload_file(
