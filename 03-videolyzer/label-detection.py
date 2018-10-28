@@ -2,7 +2,7 @@
 import boto3
 session = boto3.Session(profile_name='pythonAutomation')
 s3 = session.resource('s3')
-bucket = s3.create_bucket(Bucket='hollaradovideozervideos')
+bucket = s3.create_bucket(Bucket='hollaradovideolyzer1')
 from pathlib import Path
 get_ipython().run_line_magic('ls', '/Users/IT/Downloads/*.mp4')
 get_ipython().run_line_magic('ls', '\\Users\\IT\\Downloads\\*.mp4')
